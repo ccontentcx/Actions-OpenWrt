@@ -1,4 +1,31 @@
 <pre>
+  
+  qemu-system-aarch64 \
+    -M virt \
+    -cpu cortex-a53 \
+    -smp 2 \
+    -m 512 \
+    -kernel <您的內核檔案路徑> \
+    -append "root=/dev/vda rootwait console=ttyAMA0" \
+    -drive file=<您的emmc鏡像路徑>,format=raw,if=virtio \
+    -net nic,model=virtio \
+    -net user,hostfwd=tcp::8080-:80 \
+    -nographic
+
+    關鍵參數說明：
+-M virt: 使用通用虛擬化平台，這是模擬 ARM 路由器的標準做法。
+-drive ...,if=virtio: 將您的 eMMC 鏡像模擬為虛擬磁碟。
+-net user,hostfwd=tcp::8080-:80: 非常重要！ 這會將虛擬機的 80 埠（LuCI 界面）映射到您電腦的 8080 埠。
+-nographic: 讓輸出直接顯示在您的終端機上。
+
+qemu-system-aarch64 -M virt -cpu cortex-a53 -m 512 \
+    -drive file=<変換したファイル名>.img,format=raw,if=virtio \
+    -net nic -net user \
+    -nographic
+
+</pre>
+
+<pre>
   以下是该设备的启动逻辑与结构分析：
 1. 启动结构并非完全“固定”
 虽然出厂和大多数第三方固件（如 OpenWrt、ImmortalWrt）默认使用 U-Boot，但启动链实际上分为几个阶段，你可以根据需求调整：
