@@ -1,3 +1,22 @@
+4. 深度開發：本地 Clone + Quilt 補丁
+3. 雲端編譯：GitHub Actions (與 .yml 結合)
+2. 修改「特定軟體」：使用 SDK
+如果你只想改某一個 App（例如 vlmcsd 或某個驅動）的代碼，而不想編譯整個作業系統
+1. 修改「配置」：使用 Image Builder (推薦)
+如果你只是想修改預設的網路設定、預裝外掛、或是加入自己的 .sh 腳本，不需要下載完整源碼
+
+
+
+
+
+
+
+
+
+
+
+
+
 **English** | [中文](https://p3terx.com/archives/build-openwrt-with-github-actions.html)
 
 # Actions-OpenWrt
