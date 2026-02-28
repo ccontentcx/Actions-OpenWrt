@@ -90,6 +90,13 @@ OpenWrt 的進程間通信 (ubus)
 Rust 的交叉編譯
 Linux 的 /proc 虛擬文件系統（內存與 CPU 數據來源）
 你手上現在有哪款具體的硬體設備？（這決定了你是玩 eBPF 還是玩 GPIO 擴展）。
+
+
+
+
+  內存部分：讀取 /proc/meminfo 並解析。
+網絡部分：使用 pnet 庫抓取網卡上的原始數據包（Raw Sockets），統計每個 IP 的流量。
+挑戰：嘗試將這個程序交叉編譯為你 LEDE 固件對應的架構（如 MIPS 或 ARM）。
 </pre>
 
 
