@@ -1,3 +1,26 @@
+<pre>
+  以下是该设备的启动逻辑与结构分析：
+1. 启动结构并非完全“固定”
+虽然出厂和大多数第三方固件（如 OpenWrt、ImmortalWrt）默认使用 U-Boot，但启动链实际上分为几个阶段，你可以根据需求调整：
+ROM Code (BL1): 固化在 MT7981 芯片内部，不可更改。
+BL2 (Preloader): 负责初始化 DDR。
+BL31 (ATF/TF-A): 负责安全环境和电源管理。
+BL33 (U-Boot): 這是你提到的“固定结构”部分。 
+OpenWRT
+OpenWRT
+ +1
+2. 为什么通常“一定是” U-Boot？
+在 RAX3000M 这种基于 MediaTek Filogic 平台的设备上，U-Boot 被广泛使用是因为：
+引导兼容性： 它能正确加载 Linux 内核（uImage/itb 格式）并传递设备树（DTB）。
+救砖功能： 第三方“不死 U-Boot”（如 hanwckf 的版本）提供了 Web 刷机界面，即使 Linux 系统崩溃，也能通过 U-Boot 恢复。
+分区管理： 它定义了 NAND/eMMC 的分区表结构，决定了内核和 rootfs 存放在哪。 
+3. 可选的替代结构
+如果你想打破“固定”结构，理论和实践上有以下可能：
+直接引导： 一些极简嵌入式系统可以跳过 U-Boot，由 BL2 直接跳转到精简后的内核，但这对 RAX3000M 的复杂驱动初始化非常不利。
+UEFI (EDK2): 部分开发者正在为 MT798x 平台适配 UEFI 引导，但这在路由器固件中极少见。
+OEM 限制： 移动原厂 U-Boot 带有签名校验，如果你想刷第三方 Linux（OpenWrt），必须更换为支持校验解除的第三方 U-Boot。
+</pre>
+
 4. 深度開發：本地 Clone + Quilt 補丁
 3. 雲端編譯：GitHub Actions (與 .yml 結合)
 2. 修改「特定軟體」：使用 SDK
