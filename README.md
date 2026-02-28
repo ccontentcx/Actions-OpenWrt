@@ -1,4 +1,15 @@
 <pre>
+1. 【推薦】使用 QEMU 虛擬平台來測試你的固件功能
+如果你主要是想測試 .config 編譯出來的軟體、套件或腳本是否正常運作，建議不要執著於模擬「RAX3000M」這個硬體。
+做法： 在 make menuconfig 時，將 Target System 改選為 QEMU ARM Virt。
+優點： 這種模式不需要 U-Boot，QEMU 可以直接引導 kernel。你可以把你在 RAX3000M 想要用的套件清單放進去編譯，測試軟體邏輯。
+啟動指令範例：
+bash
+qemu-system-aarch64 -nographic -M virt -cpu cortex-a53 -m 512 \
+  -kernel openwrt-armvirt-64-Image-initramfs
+</pre>
+
+<pre>
   
   qemu-system-aarch64 \
     -M virt \
