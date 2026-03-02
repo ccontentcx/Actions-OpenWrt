@@ -1,6 +1,11 @@
 <pre>
 
 RAX3000M 使用的是 聯發科（MediaTek）MT7981B    aarch64-linux-gnu-gcc
+
+增加快取大小：避免大檔案導致傳輸中斷。
+git config --global http.postBuffer 524288000 (設為 500MB)
+開啟並行優化：針對檔案數量極多的專案。
+git config --global feature.manyFiles true
   
 1. 【推薦】使用 QEMU 虛擬平台來測試你的固件功能
 如果你主要是想測試 .config 編譯出來的軟體、套件或腳本是否正常運作，建議不要執著於模擬「RAX3000M」這個硬體。
