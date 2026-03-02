@@ -4,6 +4,7 @@ RAX3000M 使用的是 聯發科（MediaTek）MT7981B    aarch64-linux-gnu-gcc
 
 增加快取大小：避免大檔案導致傳輸中斷。
 git config --global http.postBuffer 524288000 (設為 500MB)
+git config --global http.postBuffer 524288000
 開啟並行優化：針對檔案數量極多的專案。
 git config --global feature.manyFiles true
   
